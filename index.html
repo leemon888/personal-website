@@ -318,7 +318,7 @@ const photos=[
 document.getElementById("photoList").innerHTML=photos.map((p,i)=>`<figure class="ph"><img src="assets/photos/${p[0]}" alt="${p[1]}, ${p[2]}" loading="lazy"><figcaption><b>${String(i+1).padStart(2,"0")}</b>${p[1]} · ${p[2]}</figcaption></figure>`).join("");
 
 /* art: covers live in assets/art/. Each reel's code comes from its instagram.com/p/<code>/ link; clicking loads Instagram's own player. */
-const reels=[["DS0T3vwEcmP","01.webp"],["DZbSPG2RnOV","02.webp"],["DZXvjveRMQS","03.webp"],["DaZbY_sgJpA","04.webp"],["DSWXCdhkXig","05.webp"],["DYyF1mGxfSX","06.png"],["DRanwAYkfPi","07.webp"],["DQuq_4REZqh","08.webp"],["DQDn4KaAG7h","09.webp"],["DSyHraXEVJd","10.webp"]];
+const reels=[["DaZbY_sgJpA","01.webp"],["DZbSPG2RnOV","02.webp"],["DZXvjveRMQS","03.webp"],["DYyF1mGxfSX","04.webp"],["DS0T3vwEcmP","05.webp"],["DSyHraXEVJd","06.png"],["DSWXCdhkXig","07.webp"],["DRanwAYkfPi","08.webp"],["DQuq_4REZqh","09.webp"],["DQDn4KaAG7h","10.webp"]];
 document.getElementById("reelGrid").innerHTML=reels.map((r,i)=>`<button class="reel" data-code="${r[0]}" aria-label="Play reel ${i+1}"><img src="assets/art/${r[1]}" alt="Pencil portrait ${i+1}" loading="lazy">
   <svg class="badge" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" fill="currentColor"/><path d="M10 7.5l6 4.5-6 4.5z" fill="#333"/></svg>
   <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="rgba(255,255,255,.25)"/><path d="M10 7.5l6 4.5-6 4.5z" fill="currentColor"/></svg></span></button>`).join("");
