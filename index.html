@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Christopher Lee</title>
+<meta name="description" content="Christopher Lee — math and computer science at Columbia. Projects, photos, and a bit more about me.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FCFBFF; --ink:#16151F; --muted:#74738A; --line:rgba(22,21,31,.1);
+  --accent:#6E74DC; --soft:#ECEDFD;
+  --serif:"Instrument Serif",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+/* top bar */
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(20px,4vw,48px);
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;transition:background .3s,box-shadow .3s}
+header.solid{background:rgba(252,251,255,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+header nav{display:flex;gap:clamp(16px,3vw,34px)}
+header a{color:var(--muted);transition:color .2s}
+header a:hover,header a.on{color:var(--ink)}
+header .name{color:var(--ink);font-weight:500}
+
+/* hero */
+.hero{position:relative;height:100vh;min-height:520px;display:grid;place-items:center;text-align:center;padding:0 24px;
+  background:linear-gradient(180deg,#D9DCFB 0%,#E6E3FA 45%,#F3EEFB 75%,var(--bg) 100%)}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(56px,11vw,150px);line-height:.95;letter-spacing:-.02em;color:var(--ink)}
+.hero h1 em{color:var(--accent)}
+.hero p{margin-top:22px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:rgba(22,21,31,.55)}
+.scroll{position:absolute;bottom:32px;left:0;right:0;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(22,21,31,.45);display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll::after{content:"";width:1px;height:34px;background:rgba(22,21,31,.3);animation:drip 2s ease-in-out infinite;transform-origin:top}
+@keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+.label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(36px,5vw,52px);line-height:1.05;letter-spacing:-.01em}
+
+/* intro */
+.intro{padding:90px 0 70px}
+.intro p{font-family:var(--serif);font-size:clamp(26px,3.6vw,38px);line-height:1.25;letter-spacing:-.005em}
+.intro em{color:var(--accent)}
+
+/* projects */
+.work{padding:0 0 110px;scroll-margin-top:90px}
+.row{display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:baseline;padding:30px 0;border-top:1px solid var(--line);transition:padding .3s}
+.row:last-child{border-bottom:1px solid var(--line)}
+.row:hover{padding-left:10px}
+.row .n{font-size:12px;color:var(--muted);letter-spacing:.1em}
+.row h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3.4vw,34px);line-height:1.12}
+.row p{color:var(--muted);font-size:15px;margin-top:8px;max-width:560px}
+.row .meta{font-size:12px;color:var(--muted);margin-top:10px;letter-spacing:.04em}
+.row .go{font-size:13px;white-space:nowrap}
+.row .go a{border-bottom:1px solid var(--accent);padding-bottom:1px;margin-left:14px}
+.row .go a:hover{color:var(--accent)}
+.row .go span{color:var(--muted)}
+
+/* views */
+.view{display:none}.view.active{display:block;animation:in .6s cubic-bezier(.2,.7,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}
+
+/* photos */
+.photos{padding:130px 0 80px}
+.photos .top{text-align:center;margin-bottom:60px}
+.photos .top p{color:var(--muted);margin-top:14px}
+.ph{margin:0 auto 56px;text-align:center}
+.ph img{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:4px;cursor:zoom-in}
+.ph figcaption{margin-top:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.ph figcaption b{font-weight:400;color:var(--ink);margin-right:10px}
+
+/* about */
+.about{padding:140px 0 90px}
+.about .me{display:flex;gap:32px;align-items:center;margin-bottom:56px;flex-wrap:wrap}
+.avatar{width:120px;height:120px;border-radius:50%;overflow:hidden;flex:none;background:var(--soft)}
+.avatar img{width:100%;height:100%;object-fit:cover;transform:scale(1.5);transform-origin:50% 25%}
+.about p.big{font-family:var(--serif);font-size:clamp(26px,3.4vw,36px);line-height:1.22;max-width:640px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.cols section{margin-bottom:44px}
+.cols ul{list-style:none}
+.cols li{padding:11px 0;border-top:1px solid var(--line);font-size:15px;display:flex;justify-content:space-between;gap:12px}
+.cols li:last-child{border-bottom:1px solid var(--line)}
+.cols li small{color:var(--muted);font-size:13px}
+.cols a:hover{color:var(--accent)}
+.cols p{color:var(--muted);font-size:15px}
+
+
+/* icons */
+.ic{width:18px;height:18px;flex:none}
+.icons{display:flex;gap:12px;flex-wrap:wrap}
+.icons a{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:#fff;transition:transform .25s,border-color .25s,color .25s,box-shadow .25s}
+.icons a .ic{width:20px;height:20px}
+.icons a:hover{transform:translateY(-3px);color:var(--accent);border-color:var(--accent);box-shadow:0 10px 22px rgba(110,116,220,.18)}
+.cols li a.with{display:inline-flex;align-items:center;gap:10px}
+.cols li a.with .ic{width:16px;height:16px;color:var(--muted)}
+footer .icons{gap:8px}footer .icons a{width:34px;height:34px;border:0;background:none}footer .icons a .ic{width:17px;height:17px}
+/* art */
+.art{padding:120px 0 80px;max-width:940px}
+.ig-head{display:flex;gap:clamp(20px,5vw,56px);align-items:center;margin-bottom:34px;padding:0 4px}
+.ig-av{width:clamp(84px,18vw,140px);aspect-ratio:1;border-radius:50%;overflow:hidden;flex:none;border:1px solid var(--line);background:var(--soft)}
+.ig-av img{width:100%;height:100%;object-fit:cover;display:block}
+.ig-top{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.ig-top h2{font-family:var(--sans);font-size:20px;font-weight:500;letter-spacing:0;line-height:1.2}
+.ig-btn{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:8px;background:var(--ink);color:#fff;font-size:13px;font-weight:500;transition:background .2s}
+.ig-btn:hover{background:var(--accent)}
+.ig-stats{display:flex;gap:26px;margin:14px 0;font-size:15px;flex-wrap:wrap}
+.ig-stats b{font-weight:600}
+.ig-bio{font-size:14px;line-height:1.5}.ig-bio span{color:var(--muted)}
+.ig-tabs{display:flex;justify-content:center;border-top:1px solid var(--line);margin-bottom:4px}
+.ig-tabs span{display:flex;align-items:center;gap:8px;padding:14px 4px;margin-top:-1px;border-top:1px solid var(--ink);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.ig-tabs svg{width:14px;height:14px}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.reel{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--soft);border:0;padding:0;cursor:pointer;display:block}
+.reel img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1),filter .3s}
+.reel:hover img{transform:scale(1.04);filter:brightness(.82)}
+.reel .badge{position:absolute;top:9px;right:9px;width:22px;height:22px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.35));color:#fff}
+.reel .go{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:opacity .25s;color:#fff}
+.reel .go svg{width:44px;height:44px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.4))}
+.reel:hover .go,.reel:focus-visible .go{opacity:1}
+.ig-note{text-align:center;margin-top:26px;font-size:13px;color:var(--muted)}
+.ig-note a{border-bottom:1px solid var(--accent);padding-bottom:1px}.ig-note a:hover{color:var(--accent)}
+.rb{position:fixed;inset:0;z-index:60;background:rgba(252,251,255,.94);backdrop-filter:blur(10px);display:none;place-items:center;padding:20px;cursor:zoom-out}
+.rb.open{display:grid;animation:in .3s}
+.rb .box{width:min(440px,94vw);cursor:default;display:flex;flex-direction:column;gap:12px;align-items:center}
+.rb video{width:100%;max-height:80vh;border-radius:12px;background:#111;box-shadow:0 30px 70px rgba(110,116,220,.25);display:block}
+.rb .msg{display:none;font-size:14px;color:var(--muted);text-align:center;padding:40px 20px}
+.rb .box.err video{display:none}.rb .box.err .msg{display:block}
+.rb .open-ig{font-size:13px;border-bottom:1px solid var(--accent);padding-bottom:1px}
+.rb .x{position:absolute;top:18px;right:22px;font-size:30px;line-height:1;color:var(--muted);cursor:pointer;background:none;border:0}
+.rb .x:hover{color:var(--ink)}
+
+footer{max-width:860px;margin:0 auto;padding:30px 24px 50px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+footer a:hover{color:var(--ink)}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(252,251,255,.94);display:none;place-items:center;padding:24px;cursor:zoom-out}
+.lb.open{display:grid}.lb img{max-width:100%;max-height:92vh;border-radius:4px}
+
+@media(max-width:700px){
+  .ig-stats{gap:18px;font-size:14px}
+  header .name{font-size:11px}
+  .row{grid-template-columns:1fr;gap:6px}.row .n{display:none}.row .go{margin-top:6px}.row .go a{margin:0 14px 0 0}
+  .cols{grid-template-columns:1fr;gap:0}
+}
+@media(max-width:560px){
+  header{justify-content:center;font-size:11px;letter-spacing:.08em}
+  header .name{display:none}header nav{gap:16px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+<symbol id="i-in" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+<symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 7.5l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<header id="bar">
+  <a class="name" href="#home">Christopher Lee</a>
+  <nav>
+    <a href="#projects" data-r="projects">Projects</a>
+    <a href="#photos" data-r="photos">Photos</a>
+    <a href="#art" data-r="art">Art</a>
+    <a href="#about" data-r="about">About</a>
+    <a href="assets/Christopher_Lee_Resume.pdf" target="_blank" rel="noopener">CV</a>
+  </nav>
+</header>
+
+<!-- HOME -->
+<div class="view" id="v-home">
+  <section class="hero">
+    <div>
+      <h1>Christopher <em>Lee</em></h1>
+      <p>Math &amp; Computer Science · Columbia University</p>
+    </div>
+    <div class="scroll">Scroll</div>
+  </section>
+
+  <div class="wrap">
+    <div class="intro">
+      <p>I study math and computer science, and I like making AI systems <em>you can check</em> and building things people actually use.</p>
+    </div>
+
+    <div class="work" id="projects">
+      <div class="label">Selected projects</div>
+      <article class="row">
+        <span class="n">01</span>
+        <div>
+          <h3>Verification budgets for LLM reasoning</h3>
+          <p>Research with Columbia's CSUREMM program, sponsored by Jane Street. A framework for deciding where to spend limited verification effort across an LLM's reasoning, tested on 5,000+ claims and 8 models.</p>
+          <div class="meta">Python · LLM APIs · Summer 2026</div>
+        </div>
+        <div class="go"><span>Paper soon</span></div>
+      </article>
+      <article class="row">
+        <span class="n">02</span>
+        <div>
+          <h3>Home Again</h3>
+          <p>A memory game built from a family's own photos, songs and voice messages, gathered by an AI guide through conversation.</p>
+          <div class="meta">Gemini · ElevenLabs · Postgres · three.js</div>
+        </div>
+        <div class="go"><a href="https://github.com/backlight314/home-again" target="_blank" rel="noopener">Code</a><a href="https://devpost.com/software/home-again-mt7v8n" target="_blank" rel="noopener">Devpost</a></div>
+      </article>
+      <article class="row">
+        <span class="n">03</span>
+        <div>
+          <h3>Lionplan</h3>
+          <p>A drag-and-drop 8-semester course planner with live requirement tracking, built at the ADI CodeCollab Hackathon.</p>
+          <div class="meta">Next.js · TypeScript · Supabase</div>
+        </div>
+        <div class="go"><span>Link soon</span></div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTOS -->
+<div class="view" id="v-photos">
+  <div class="wrap photos">
+    <div class="top"><h2>Photos</h2><p>Taiwan, Japan, New York and a few places in between.</p></div>
+    <div id="photoList"></div>
+  </div>
+</div>
+
+<!-- ART -->
+<div class="view" id="v-art">
+  <div class="wrap art">
+    <div class="ig-head">
+      <div class="ig-av"><img src="assets/art/avatar.png" alt="cm_.art profile picture"></div>
+      <div>
+        <div class="ig-top"><h2>cm_.art</h2>
+          <a class="ig-btn" href="https://www.instagram.com/cm_.art/" target="_blank" rel="noopener"><svg class="ic" style="width:15px;height:15px"><use href="#i-ig"/></svg>Follow</a></div>
+        <div class="ig-stats"><span><b>79</b> posts</span><span><b>193</b> followers</span><span><b>12</b> following</span></div>
+        <div class="ig-bio"><span>Artist</span><br>Dm for portrait</div>
+      </div>
+    </div>
+    <div class="ig-tabs"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M10 8.5l5 3.5-5 3.5z" fill="currentColor"/></svg>Reels</span></div>
+    <div class="ig-grid" id="reelGrid"></div>
+    <p class="ig-note">A few favorites. Tap one to play it here, or see everything on <a href="https://www.instagram.com/cm_.art/" target="_blank" rel="noopener">Instagram</a>.</p>
+  </div>
+</div>
+
+<div class="rb" id="rb" aria-hidden="true">
+  <button class="x" aria-label="Close">&times;</button>
+  <div class="box" id="rbBox"><video id="rbVideo" controls playsinline loop preload="none"></video><p class="msg">This video isn't on the site yet.</p><a class="open-ig" id="rbLink" target="_blank" rel="noopener">Open on Instagram &#8599;</a></div>
+</div>
+
+<!-- ABOUT -->
+<div class="view" id="v-about">
+  <div class="wrap about">
+    <div class="me">
+      <div class="avatar"><img src="assets/headshot.png" alt="Christopher Lee"></div>
+      <p class="big">Hi, I'm Chris! I'm from NYC and I'm studying math and CS at Columbia. I enjoy playing tennis and volleyball, singing, piano, drawing, and taking photos.</p>
+    </div>
+    <div class="cols">
+      <div>
+        <section>
+          <div class="label">Clubs</div>
+          <ul>
+            <li><a href="https://www.instagram.com/adicolumbia/" target="_blank" rel="noopener">Application Development Initiative</a><small>Media</small></li>
+            <li><a href="https://www.instagram.com/cucac_columbia/" target="_blank" rel="noopener">CU Chinese A Cappella</a><small>Singing</small></li>
+            <li><a href="https://columbia-climate-fund.vercel.app/" target="_blank" rel="noopener">Columbia Climate Fund</a><small>Media</small></li>
+          </ul>
+        </section>
+        <section>
+          <div class="label">Hobbies</div>
+          <p>Tennis, volleyball, singing, piano and drawing. My art lives on <a href="https://www.instagram.com/cm_.art/" target="_blank" rel="noopener" style="border-bottom:1px solid var(--accent)">@cm_.art</a>.</p>
+        </section>
+      </div>
+      <div>
+        <section>
+          <div class="label">Contact me</div>
+          <div class="icons">
+            <a href="https://github.com/leemon888" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ic"><use href="#i-gh"/></svg></a>
+            <a href="https://www.linkedin.com/in/christopher-lee8/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="ic"><use href="#i-in"/></svg></a>
+            <a href="https://www.instagram.com/cm_.art/" target="_blank" rel="noopener" aria-label="Instagram (art)"><svg class="ic"><use href="#i-ig"/></svg></a>
+            <a href="mailto:cl4371@columbia.edu" aria-label="Email"><svg class="ic"><use href="#i-mail"/></svg></a>
+          </div>        </section>
+        <section>
+          <div class="label">Social media I've run</div>
+          <ul>
+            <li><a href="https://www.instagram.com/columbiaclimatefund/" target="_blank" rel="noopener" class="with"><svg class="ic"><use href="#i-ig"/></svg>Columbia Climate Fund</a></li>
+            <li><a href="https://www.instagram.com/adicolumbia/" target="_blank" rel="noopener" class="with"><svg class="ic"><use href="#i-ig"/></svg>ADI</a></li>
+            <li><a href="https://www.instagram.com/cucac_columbia/" target="_blank" rel="noopener" class="with"><svg class="ic"><use href="#i-ig"/></svg>CU Chinese A Cappella</a></li>
+            <li><a href="https://www.instagram.com/bitecampuseats/" target="_blank" rel="noopener" class="with"><svg class="ic"><use href="#i-ig"/></svg>Bite Campus Eats</a></li>
+            <li><a href="https://www.instagram.com/wflushing/" target="_blank" rel="noopener" class="with"><svg class="ic"><use href="#i-ig"/></svg>Intramural Volleyball</a></li>
+            <li><a href="https://www.instagram.com/huntervarsitytennis/" target="_blank" rel="noopener" class="with"><svg class="ic"><use href="#i-ig"/></svg>Hunter Varsity Tennis</a></li>
+            <li><a href="https://www.instagram.com/hopup.hchs/" target="_blank" rel="noopener" class="with"><svg class="ic"><use href="#i-ig"/></svg>Hop Up HCHS</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer><span>&copy; 2026 Christopher Lee</span><span class="icons">
+  <a href="https://github.com/leemon888" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ic"><use href="#i-gh"/></svg></a>
+  <a href="https://www.linkedin.com/in/christopher-lee8/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="ic"><use href="#i-in"/></svg></a>
+  <a href="https://www.instagram.com/cm_.art/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ic"><use href="#i-ig"/></svg></a>
+  <a href="mailto:cl4371@columbia.edu" aria-label="Email"><svg class="ic"><use href="#i-mail"/></svg></a></span></footer>
+
+<div class="lb" id="lb"><img alt=""></div>
+
+<script>
+/* captions are best guesses: edit freely */
+const photos=[
+ ["01.webp","Taiwan","Mountains"],["02.webp","Taiwan","Harbor at dusk"],["03.webp","Taiwan","Tamsui"],["04.webp","Taiwan","Waterfront"],
+ ["05.png","Japan","Garden"],["06.png","Japan","Kyoto"],["07.png","Japan","River"],
+ ["08.webp","New York","Hudson"],["09.webp","New York","West Side"],["10.webp","New York","Brooklyn Bridge"],["11.webp","Columbia","First snow"],["12.webp","New York","Battery Park City"],["13.webp","New York","Downtown"],["14.webp","Dallas","From above"]];
+document.getElementById("photoList").innerHTML=photos.map((p,i)=>`<figure class="ph"><img src="assets/photos/${p[0]}" alt="${p[1]}, ${p[2]}" loading="lazy"><figcaption><b>${String(i+1).padStart(2,"0")}</b>${p[1]} · ${p[2]}</figcaption></figure>`).join("");
+
+/* art: covers live in assets/art/. Each reel's code comes from its instagram.com/p/<code>/ link; clicking loads Instagram's own player. */
+const reels=[["DS0T3vwEcmP","01.webp"],["DZbSPG2RnOV","02.webp"],["DZXvjveRMQS","03.webp"],["DaZbY_sgJpA","04.webp"],["DSWXCdhkXig","05.webp"],["DYyF1mGxfSX","06.png"],["DRanwAYkfPi","07.webp"],["DQuq_4REZqh","08.webp"],["DQDn4KaAG7h","09.webp"],["DSyHraXEVJd","10.webp"]];
+document.getElementById("reelGrid").innerHTML=reels.map((r,i)=>`<button class="reel" data-code="${r[0]}" aria-label="Play reel ${i+1}"><img src="assets/art/${r[1]}" alt="Pencil portrait ${i+1}" loading="lazy">
+  <svg class="badge" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" fill="currentColor"/><path d="M10 7.5l6 4.5-6 4.5z" fill="#333"/></svg>
+  <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="rgba(255,255,255,.25)"/><path d="M10 7.5l6 4.5-6 4.5z" fill="currentColor"/></svg></span></button>`).join("");
+const rb=document.getElementById("rb"), rbVideo=document.getElementById("rbVideo"), rbBox=document.getElementById("rbBox"), rbLink=document.getElementById("rbLink");
+function closeReel(){rb.classList.remove("open");rbVideo.pause();rbVideo.removeAttribute("src");rbVideo.load()}
+rbVideo.addEventListener("error",()=>{if(rbVideo.getAttribute("src"))rbBox.classList.add("err")});
+document.getElementById("reelGrid").addEventListener("click",e=>{const b=e.target.closest(".reel");if(!b)return;
+  const n=b.querySelector("img").getAttribute("src").match(/(\d+)\.\w+$/)[1];
+  rbBox.classList.remove("err");rbVideo.poster=b.querySelector("img").src;rbVideo.src=`assets/art/videos/${n}.mp4`;
+  rbLink.href=`https://www.instagram.com/p/${b.dataset.code}/`;rb.classList.add("open");
+  const p=rbVideo.play();if(p&&p.catch)p.catch(()=>{})});
+rb.addEventListener("click",e=>{if(!e.target.closest("iframe")&&!e.target.closest(".open-ig"))closeReel()});
+
+const bar=document.getElementById("bar"), links=[...document.querySelectorAll("[data-r]")];
+function route(){
+  let h=location.hash.slice(1)||"home";
+  let v=h==="projects"?"home":(["home","photos","art","about"].includes(h)?h:"home");
+  document.querySelectorAll(".view").forEach(el=>el.classList.toggle("active",el.id==="v-"+v));
+  links.forEach(a=>a.classList.toggle("on",a.dataset.r===h||(h==="home"&&false)));
+  document.title=(v==="home"?"":v[0].toUpperCase()+v.slice(1)+" · ")+"Christopher Lee";
+  if(h==="projects")document.getElementById("projects").scrollIntoView();
+  else window.scrollTo({top:0,behavior:"instant"});
+  onScroll();
+}
+function onScroll(){bar.classList.toggle("solid",scrollY>40||!document.getElementById("v-home").classList.contains("active"))}
+addEventListener("hashchange",route);addEventListener("scroll",onScroll,{passive:true});route();
+
+const lb=document.getElementById("lb");
+document.addEventListener("click",e=>{
+  if(e.target.matches(".ph img")){lb.firstElementChild.src=e.target.src;lb.classList.add("open")}
+  else if(lb.classList.contains("open"))lb.classList.remove("open");
+});
+addEventListener("keydown",e=>{if(e.key==="Escape"){lb.classList.remove("open");closeReel()}});
+</script>
+</body>
+</html>
