@@ -10,8 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#FCFBFF; --ink:#16151F; --muted:#74738A; --line:rgba(22,21,31,.1);
-  --accent:#6E74DC; --soft:#ECEDFD;
+  --bg:#FAFCFF; --ink:#16151F; --muted:#74738A; --line:rgba(22,21,31,.1);
+  --accent:#5C7CF0; --soft:#E6EDFF;
   --serif:"Instrument Serif",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -23,7 +23,7 @@ a{color:inherit;text-decoration:none}
 /* top bar */
 header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(20px,4vw,48px);
   font-size:12px;letter-spacing:.14em;text-transform:uppercase;transition:background .3s,box-shadow .3s}
-header.solid{background:rgba(252,251,255,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+header.solid{background:rgba(250,252,255,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
 header nav{display:flex;gap:clamp(16px,3vw,34px)}
 header a{color:var(--muted);transition:color .2s}
 header a:hover,header a.on{color:var(--ink)}
@@ -31,7 +31,18 @@ header .name{color:var(--ink);font-weight:500}
 
 /* hero */
 .hero{position:relative;height:100vh;min-height:520px;display:grid;place-items:center;text-align:center;padding:0 24px;
-  background:linear-gradient(180deg,#D9DCFB 0%,#E6E3FA 45%,#F3EEFB 75%,var(--bg) 100%)}
+  background:
+    linear-gradient(180deg,transparent 65%,var(--bg) 100%),
+    radial-gradient(60% 55% at 20% 30%,rgba(120,160,255,.55),transparent 70%),
+    radial-gradient(55% 50% at 82% 22%,rgba(150,140,255,.42),transparent 70%),
+    radial-gradient(65% 55% at 50% 82%,rgba(140,200,255,.45),transparent 70%),
+    linear-gradient(180deg,#D4E1FF 0%,#E1E8FF 50%,#EEF2FF 100%);
+  background-size:100% 100%,150% 150%,150% 150%,150% 150%,100% 100%;
+  background-repeat:no-repeat;
+  animation:gdrift 26s ease-in-out infinite alternate}
+@keyframes gdrift{
+  0%{background-position:0 0,0% 0%,100% 0%,50% 100%,0 0}
+  100%{background-position:0 0,100% 100%,0% 100%,50% 0%,0 0}}
 .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(56px,11vw,150px);line-height:.95;letter-spacing:-.02em;color:var(--ink)}
 .hero h1 em{color:var(--accent)}
 .hero p{margin-top:22px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:rgba(22,21,31,.55)}
@@ -43,9 +54,6 @@ header .name{color:var(--ink);font-weight:500}
   animation:fadein 1s 1.1s both;transition:background .3s,transform .3s,border-color .3s}
 .cue:hover{background:#fff;border-color:var(--accent);transform:translateY(3px)}
 .cue svg{width:18px;height:18px;animation:bob 2.4s ease-in-out infinite}
-.cue::before,.cue::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid var(--accent);opacity:0;animation:ripple 3s ease-out infinite}
-.cue::after{animation-delay:1.5s}
-@keyframes ripple{0%{transform:scale(1);opacity:.55}100%{transform:scale(2.1);opacity:0}}
 @keyframes bob{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
 @keyframes fadein{from{opacity:0}}
 
@@ -55,7 +63,7 @@ h2{font-family:var(--serif);font-weight:400;font-size:clamp(36px,5vw,52px);line-
 
 /* intro */
 .intro{padding:90px 0 70px;display:grid;grid-template-columns:1fr 260px;gap:clamp(28px,6vw,64px);align-items:center}
-.intro-photo{order:2;aspect-ratio:4/5;border-radius:22px;overflow:hidden;box-shadow:0 24px 50px rgba(110,116,220,.22);background:var(--soft)}
+.intro-photo{order:2;aspect-ratio:4/5;border-radius:22px;overflow:hidden;box-shadow:0 24px 50px rgba(92,124,240,.22);background:var(--soft)}
 .intro-photo img{width:100%;height:100%;object-fit:cover;object-position:52% 30%;display:block;transform:scale(1.3);transform-origin:52% 38%}
 .intro p{font-family:var(--serif);font-size:clamp(26px,3.6vw,38px);line-height:1.25;letter-spacing:-.005em}
 .intro em{color:var(--accent)}
@@ -108,7 +116,7 @@ h2{font-family:var(--serif);font-weight:400;font-size:clamp(36px,5vw,52px);line-
 .icons{display:flex;gap:12px;flex-wrap:wrap}
 .icons a{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:#fff;transition:transform .25s,border-color .25s,color .25s,box-shadow .25s}
 .icons a .ic{width:20px;height:20px}
-.icons a:hover{transform:translateY(-3px);color:var(--accent);border-color:var(--accent);box-shadow:0 10px 22px rgba(110,116,220,.18)}
+.icons a:hover{transform:translateY(-3px);color:var(--accent);border-color:var(--accent);box-shadow:0 10px 22px rgba(92,124,240,.18)}
 .cols li a.with{display:inline-flex;align-items:center;gap:10px}
 .cols li a.with .ic{width:16px;height:16px;color:var(--muted)}
 footer .icons{gap:8px}footer .icons a{width:34px;height:34px;border:0;background:none}footer .icons a .ic{width:17px;height:17px}
@@ -137,10 +145,10 @@ footer .icons{gap:8px}footer .icons a{width:34px;height:34px;border:0;background
 .reel:hover .go,.reel:focus-visible .go{opacity:1}
 .ig-note{text-align:center;margin-top:26px;font-size:13px;color:var(--muted)}
 .ig-note a{border-bottom:1px solid var(--accent);padding-bottom:1px}.ig-note a:hover{color:var(--accent)}
-.rb{position:fixed;inset:0;z-index:60;background:rgba(252,251,255,.94);backdrop-filter:blur(10px);display:none;place-items:center;padding:20px;cursor:zoom-out}
+.rb{position:fixed;inset:0;z-index:60;background:rgba(250,252,255,.94);backdrop-filter:blur(10px);display:none;place-items:center;padding:20px;cursor:zoom-out}
 .rb.open{display:grid;animation:in .3s}
 .rb .box{width:min(440px,94vw);cursor:default;display:flex;flex-direction:column;gap:12px;align-items:center}
-.rb video{width:100%;max-height:80vh;border-radius:12px;background:#111;box-shadow:0 30px 70px rgba(110,116,220,.25);display:block}
+.rb video{width:100%;max-height:80vh;border-radius:12px;background:#111;box-shadow:0 30px 70px rgba(92,124,240,.25);display:block}
 .rb .msg{display:none;font-size:14px;color:var(--muted);text-align:center;padding:40px 20px}
 .rb .box.err video{display:none}.rb .box.err .msg{display:block}
 .rb .open-ig{font-size:13px;border-bottom:1px solid var(--accent);padding-bottom:1px}
@@ -151,7 +159,7 @@ footer{max-width:860px;margin:0 auto;padding:30px 24px 50px;display:flex;justify
 footer a:hover{color:var(--ink)}
 
 /* lightbox */
-.lb{position:fixed;inset:0;z-index:50;background:rgba(252,251,255,.94);display:none;place-items:center;padding:24px;cursor:zoom-out}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(250,252,255,.94);display:none;place-items:center;padding:24px;cursor:zoom-out}
 .lb.open{display:grid}.lb img{max-width:100%;max-height:92vh;border-radius:4px}
 
 @media(max-width:700px){
@@ -217,20 +225,20 @@ footer a:hover{color:var(--ink)}
       <article class="row">
         <span class="n">02</span>
         <div>
+          <h3>Lionplan</h3>
+          <p>A course planner for Columbia students: drag courses into an 8-semester plan and track Core and major requirements as you go.</p>
+          <div class="meta">Next.js · TypeScript · Supabase</div>
+        </div>
+        <div class="go"><a href="https://lionplan.ai" target="_blank" rel="noopener">lionplan.ai</a></div>
+      </article>
+      <article class="row">
+        <span class="n">03</span>
+        <div>
           <h3>Home Again</h3>
           <p>A memory game built from a family's own photos, songs and voice messages, gathered by an AI guide through conversation.</p>
           <div class="meta">Gemini · ElevenLabs · Postgres · three.js</div>
         </div>
         <div class="go"><a href="https://github.com/backlight314/home-again" target="_blank" rel="noopener">Code</a><a href="https://devpost.com/software/home-again-mt7v8n" target="_blank" rel="noopener">Devpost</a></div>
-      </article>
-      <article class="row">
-        <span class="n">03</span>
-        <div>
-          <h3>Lionplan</h3>
-          <p>A drag-and-drop 8-semester course planner with live requirement tracking, built at the ADI CodeCollab Hackathon.</p>
-          <div class="meta">Next.js · TypeScript · Supabase</div>
-        </div>
-        <div class="go"><span>Link soon</span></div>
       </article>
     </div>
   </div>
